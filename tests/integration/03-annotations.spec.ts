@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { clickLink } from "../../helpers/clickhelpers";
+import { clickLink } from "../../helpers/clickHelpers";
 
 test.describe("Annotations", () => {
   test.beforeEach(async ({ page }) => {
