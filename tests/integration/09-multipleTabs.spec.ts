@@ -71,4 +71,37 @@ test.describe("Interacting Multiple Tabs", { tag: "@regression" }, () => {
    * Click on the "Microsoft" link and validate URL contains "Microsoft"
    * Click on the "Tesla" link and validate URL contains "Tesla"
    */
+  test("validating", async({ page }) => {
+    // const [appleTab] = await Promise.all([
+    //   page.waitForEvent("popup"),
+    //   clickLink(page, "Apple"),
+    // ]);
+    // await expect(appleTab).toHaveURL(/apple/i)
+
+    // const [microsoftTab] = await Promise.all([
+    //   page.waitForEvent("popup"),
+    //   clickLink(page, "Microsoft"),
+    // ]);
+    // await expect(microsoftTab).toHaveURL(/microsoft/i)
+
+    // const [teslaTab] = await Promise.all([
+    //   page.waitForEvent("popup"),
+    //   clickLink(page, "Tesla"),
+    // ]);
+    // await expect(teslaTab).toHaveURL(/tesla/i)
+
+    // const links = ["Apple", "Microsoft"];
+
+    const links = ["Apple", "Microsoft"];
+    for (const link of links) {
+  
+      const [newTab] = await Promise.all([
+        page.waitForEvent("popup"),
+        clickLink(page, link),
+      ]);
+
+      expect(newTab.url()).toContain(link.toLowerCase());
+    }
+  });
+
 });
