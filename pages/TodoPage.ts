@@ -26,8 +26,12 @@ export class TodoPage extends BasePage {
   }
 
   async removeAll() {
-    while((await this.todoItems.count()) > 0) {
+    
+    let amountOfItems = await this.todoItems.count()
+
+    while(amountOfItems > 0) {
       await this.todoItems.locator('.destroy').first().click()
+      amountOfItems = await this.todoItems.count()
     }
   }
 }
