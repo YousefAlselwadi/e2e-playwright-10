@@ -13,7 +13,12 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  // timeout: 10000
+  // globalTimeout: 100000
   testDir: './tests',
+  snapshotDir: './snapshots',
+  // globalSetup: 'tests/setup/global.setup.ts',
+  // globalTeardown: '/',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -51,7 +56,33 @@ export default defineConfig({
          viewport: { width: 1920, height: 1080 },
          },
     },
+    
+    {
+      name: 'setup',
+      testMatch: /global\.setup\.ts/,
+      teardown: 'teardown'
+    },
 
+    {
+      name: 'teardown',
+      testMatch: /global\.teardown\.ts/,
+      use: { 
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+        storageState: './user-data/loginAuth.json'
+       },
+    },
+
+    {
+      name: 'loggedIn',
+      testMatch: '**/17-globalSetup.spec.ts',
+      dependencies: ['setup'],
+      use: { 
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+        storageState: './user-data/loginAuth.json'
+       },
+    },
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
