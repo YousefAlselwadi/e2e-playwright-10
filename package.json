@@ -13,6 +13,10 @@
   "devDependencies": {
     "@playwright/test": "^1.49.0",
     "@types/node": "^22.9.0",
+    "@types/oracledb": "^6.5.3",
     "dotenv": "^16.4.5"
+  },
+  "dependencies": {
+    "oracledb": "^6.7.1"
   }
 }
